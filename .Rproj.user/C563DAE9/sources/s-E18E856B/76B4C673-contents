@@ -194,7 +194,7 @@ library(tidyverse)
 --
 
 .center[
-![messy](messychart.jpg?raw=true)
+![messy](https://github.com/nate-koser/onlinepres/blob/master/messychart.JPG?raw=true)
 ]
 
 --
@@ -210,7 +210,7 @@ library(tidyverse)
 --
 
 .center[
-![speakers](speakerdiff.jpg?raw=true)
+![speakers](https://github.com/nate-koser/onlinepres/blob/master/speakerdiff.JPG?raw=true)
 ]
 
 ---
@@ -220,7 +220,7 @@ library(tidyverse)
 - Speakers C3 and C7, especially C3, seem to be outliers - they *do not* follow the generalization about (H1 - H2) in Korean. 
 
 .center[
-![speakers](speakerdiff.jpg?raw=true)
+![speakers](https://github.com/nate-koser/onlinepres/blob/master/speakerdiff.JPG?raw=true)
 ]
 
 ---
@@ -230,7 +230,7 @@ library(tidyverse)
 - What if the researchers had **only** examined speakers C3 or C7? They would have a skewed view of (H1-H2) in Cheju Korean that does not follow the "general case". This shows how important having a lot of data is! 
 
 .center[
-![speakers](speakerdiff.jpg?raw=true)
+![speakers](https://github.com/nate-koser/onlinepres/blob/master/speakerdiff.JPG?raw=true)
 ]
 
 ---
@@ -241,7 +241,7 @@ library(tidyverse)
 - But at the same time, we can't say that what speakers C3 and C7 are doing is "wrong". Their grammar is just one possible grammar of Cheju Korean, where there are extreme differences between H1 and H2. 
 
 .center[
-![speakers](speakerdiff.jpg?raw=true)
+![speakers](https://github.com/nate-koser/onlinepres/blob/master/speakerdiff.JPG?raw=true)
 ]
 
 ---
@@ -251,7 +251,7 @@ library(tidyverse)
 - Also, they report no main effect of Dialect on (H1-H2). Would this change if speakers C3 and C7 were removed? 
 
 .center[
-![speakers](speakerdiff.jpg?raw=true)
+![speakers](https://github.com/nate-koser/onlinepres/blob/master/speakerdiff.JPG?raw=true)
 ]
 
 ---
@@ -272,11 +272,6 @@ library(tidyverse)
 <br>
 .center[
 ##**Thanks for reading!**
-]
-
----
-.center[
-![speakers](https://github.com/nate-koser/onlinepres/blob/master/messychart.JPG?raw=true)
 ]
 
 
