@@ -1,0 +1,279 @@
+---
+title: "Online Presentation"
+subtitle: "Data Science For Linguistics"
+author: "Nate Koser"
+date: "Rutgers University </br> `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["rutgers", "rutgers-fonts"]
+    nature:
+      beforeInit: "https://www.jvcasillas.com/ru_xaringan/js/ru_xaringan.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r setup, include=FALSE}
+library(xaringan)
+library(tidyverse)
+```
+# The Article
+
+- The article I chose was: Cho, Taehong, Sun-Ah Jun and Peter Ladefoged. (2002). Acoustic and aerodynamic correlates of Korean stops and fricatives. *Journal of Phonetics*, **30**: 193-228.  
+
+--
+
+- Chosen because the three-way lenis/fortis/aspirated stop distinction is typologically unusual and I'm an L2 Korean speaker. 
+
+--
+
+- The article can be accesseed [here.](https://ac.els-cdn.com/S0095447001901536/1-s2.0-S0095447001901536-main.pdf?_tid=c684e2e1-d3d2-4ae0-8bee-3c12e5d6df78&acdnat=1523024193_75be22f6726108076d81645d92776ff0)
+
+--
+
+---
+
+# Research Questions and Goals
+
+- Three way phonological distinction in Korean stops /p, t, k/: lenis, aspirated, fortis; two-way lenis - fortis disctinction for /s/
+
+--
+
+- Authors want to examine the salient acoustic properties of this distinction. How does the phonetics interpret this phonological difference?
+
+
+- Does this differ by dialect? The authors examine speakers of "standard" Seoul Korean and speakers of Cheju (Jeju) Korean, the conserative dialect of a small island considered to be a different language (mutually unintelligible)
+
+---
+
+# Methods
+
+- data collected from 12 speakers - eight speakers of Cheju Korean and four speakers of Seoul Korean
+
+--
+
+- Two Seoul Korean speakers short-term visitors to America, two long-term residents who use "virtually only Korean"
+
+--
+
+- Cheju speakrs recorded in Cheju, no report on their linguistic status (do they only speak Cheju? were they bilingual) which is probably not ideal
+
+---
+
+# Methods
+
+- For stops: each stop placed in word-initial position followed by /a/, spoken in isolation
+
+--
+
+- For fricatives: word-initial and word-medial position
+
+--
+
+- Approximant /l/ in word-initial position included as a baseline for understanding voice quality of vowels and comparison with vowels following the stops
+
+--
+
+- Each token repeated 6 times by Seoul speakers, only twice by Cheju speakers due to time constraints. Could increase the risk of a sampling error for Cheju?
+
+---
+
+# Measurements
+
+- considered the following measurements for stops: VOT, burst energy, F0, amplitude difference between H1 and H2 (harmonics), amplitude difference between the H1 and F2, intraoral pressure and airflow data
+
+--
+
+- for fricatives: duration, centroid of fricative noise, RMS energy, F0, H1-H2, and H1-F2
+
+
+
+---
+
+#Analysis
+
+- data averaged over repetitions (each speaker is one "unit" of data) in hopes of meeting linear model assumption that errors are independent (no correlation of errors)
+
+--
+
+- used a Huyhn-Feldt corrected degree of freedom to generate F ratio and *p*-values to avoid violation of sphericity assumption (variances of difference between all pairs of within-subject conditions is equal)
+
+--
+
+- *p*-values less than .05 considered significant, *p*-values less than or equal to .08 considered "non-significant trend"
+
+--
+
+- *post-hoc* Bonferroni-Dunn model used for analysis at lowered .03 alpha in case the data have heterogeneous variances
+
+---
+
+# Analysis
+
+- factors: Stop (or Fricative) Category(Lenis, Fortis, Aspirated), Place of Articulation, VOT, Position-in-Vowel(onset, midpoint), Dialect(seoul, Cheju)
+
+--
+
+- used SPSS and StatView for ANOVA and *post-hoc* analysis
+
+--
+
+- reported main effects and interactions (when present) for all the variables
+
+---
+
+# Appropriateness of Analysis
+
+- the variables (different acoustic measurements) strike me as a good mix of measurements to get an idea about the acoustic properties of a segment
+
+--
+
+- reporting of main effects and interactions for every single variable gives a pretty clear idea of exactly what is going on in the phonetics of Korean stops and fricatives
+
+---
+
+# Appropriateness of Analysis 
+
+
+- the GLM repeated measures ANOVA seems like an appropriate model to use given the nature of the data, and they were very thorough in reporting F and *p*-values for every model they fit
+
+--
+
+- keeping track of marginal *p*-values seems good - can keep track of tendencies that we might not notice otherwise
+
+---
+
+# Approprateness of Analysis: Unfamiliar Methods
+
+- the Huynh-Feldt correction was new to me. This checks for equal difference in variance between factors in the model (sphericity assumption). 
+
+--
+
+- In reading about it, it seems that some believe the correction to not be conservative enough, which could lead a researcher to think the sphericity doesn't hold when it actually does.
+
+---
+
+# Approprateness of Analysis: Unfamiliar Methods
+
+- the Bonferroni-Dunn correction was also new to me. This is used when making multiple comparisons to compensate for chance of incorrectly rejecting null hypothesis (Type 1 error; more comparisions, more chance of error)
+
+--
+
+-  tests each individual hypothesis at a significance level of α/*m*, where α is the desired overall alpha level and *m* is the number of hypotheses. Increases rigor of hypothesis testing
+
+--
+
+- in reading about it, some think the Bonferroni correction can be too conservative if the number of comparisions is very large or there is positive correlation between variables. Probably not a problem for the current article, and this is apparently a criticism of this kind of correction in general, not Bonferroni-Dunn in particular
+
+--
+
+- seems like a good way to avoid making unwanted errors when making a large number of comparisons
+
+---
+
+# Presentation of Results
+
+- For every acoustic property measured, main effects and interactions were reported along with F ratios and *p*-values. As stated before, this gives a very clear idea of exactly what is going on in the phonetics of Korean stops and fricatives 
+
+--
+
+- Concrete answer to the question of how the phonetics is interpreting the abstract phonological difference of these stops and fricatives in Korean
+
+--
+
+- It seems the results were accurately interpreted and reported 
+
+---
+
+# Presentation of Results
+
+- Some of the charts and graphs were difficult to read - could have benefitted from color or some other visual aid
+
+--
+
+.center[
+![messy](messychart.jpg)
+]
+
+--
+
+- figures like this are hard to read!
+
+---
+
+# Odds and Ends
+
+- Something I really liked - their data was grouped by dialect and averaged over each speaker, but they make a really interesting theoretical point by showing what the data look like when each speaker is taken individually: 
+
+--
+
+.center[
+![speakers](speakerdiff.jpg)
+]
+
+---
+
+# Odds and Ends
+
+- Speakers C3 and C7, especially C3, seem to be outliers - they *do not* follow the generalization about (H1 - H2) in Korean. 
+
+.center[
+![speakers](speakerdiff.jpg)
+]
+
+---
+
+# Odds and Ends
+
+- What if the researchers had **only** examined speakers C3 or C7? They would have a skewed view of (H1-H2) in Cheju Korean that does not follow the "general case". This shows how important having a lot of data is! 
+
+.center[
+![speakers](speakerdiff.jpg)
+]
+
+---
+
+
+# Odds and Ends
+
+- But at the same time, we can't say that what speakers C3 and C7 are doing is "wrong". Their grammar is just one possible grammar of Cheju Korean, where there are extreme differences between H1 and H2. 
+
+.center[
+![speakers](speakerdiff.jpg)
+]
+
+---
+
+# Odds and Ends
+
+- Also, they report no main effect of Dialect on (H1-H2). Would this change if speakers C3 and C7 were removed? 
+
+.center[
+![speakers](speakerdiff.jpg)
+]
+
+---
+
+# Odds and Ends
+
+- In any case, I really liked that the researchers showed each speaker individually. It shows how pooling a lot of data together can obscure interesting, more fine-grained generalizations.
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.center[
+##**Thanks for reading!**
+]
+
+
+
+

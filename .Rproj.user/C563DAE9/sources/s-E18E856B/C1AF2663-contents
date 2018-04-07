@@ -1,0 +1,220 @@
+---
+title: "PA4"
+subtitle: "Data Science For Linguistics"
+author: "Nate Koser"
+date: "Rutgers University </br> `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["rutgers", "rutgers-fonts"]
+    nature:
+      beforeInit: "https://www.jvcasillas.com/ru_xaringan/js/ru_xaringan.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+# Hello Data
+Here I load the data set.
+
+```{r, dataload, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(dplyr)
+library(knitr)
+```
+
+```{r data load, message=FALSE, echo=TRUE}
+fricarino <- read_csv("../data_raw/fricatives.csv")
+```
+```{r data head}
+
+head(fricarino)
+```
+
+---
+
+#Tidy Data
+Here I tidy the data.
+
+```{r tidy1, message = FALSE, echo = TRUE}
+tidyfric <- fricarino %>%
+  select(., -obs) %>%
+  gather(., key = 'phoneme', value = 'value', s_cog:sh_skewness) %>%
+  separate(., col = 'phoneme', into = c('phoneme', 'obstype'), sep = '_') %>%
+  filter(., obstype == "cog") %>%
+  select(., phoneme, value) %>%
+  rename(., cogval = value)
+
+skewtid <- fricarino %>%
+  select(., -obs) %>%
+  gather(., key = 'phoneme', value = 'value', s_cog:sh_skewness) %>%
+  separate(., col = 'phoneme', into = c('phoneme', 'obstype'), sep = '_') %>%
+  filter(., obstype == "skewness") %>%
+  select(., phoneme, value) %>%
+  rename(., skewness = value)
+
+tidyfric$skewness <- skewtid$skewness
+```
+
+---
+
+#Tidy Data
+```{r tidyoutput, message = TRUE, echo = TRUE}
+head(tidyfric, n = 10)
+```
+
+---
+
+#Descriptive Statistics
+Here I present some descriptive statistics.
+```{r stats, include = FALSE, echo = FALSE}
+s <- filter(tidyfric, phoneme == "s") 
+sh <- filter(tidyfric, phoneme == "sh")
+mean(s$cogval)
+mean(s$skewness)
+mean(sh$cogval)
+mean(sh$skewness)
+```
+
+| Phoneme | Mean Gravity | Mean Skewness |
+| :-      | :-            | :-           |
+| s       | `r round(mean(s$cogval), 2)` | `r round(mean(s$skewness), 2)` |
+| ʃ       | `r round(mean(sh$cogval), 2)` | `r round(mean(sh$skewness), 2)` |
+ 
+<br>
+- The mean center of gravity measurement in Hz for [s] was `r round(mean(s$cogval), 2)`.
+- The mean skewness measurement in [s] was `r round(mean(s$skewness), 2)`.
+- The mean center of gravity measurement in Hz for [ʃ] was `r round(mean(sh$cogval), 2)`.
+- The mean skewness measurement for [ʃ] was `r round(mean(sh$skewness), 2)`.
+
+---
+
+#Center of Gravity by Phoneme
+
+```{r boxplot, fig.width=10, fig.height=6, echo=FALSE}
+ggplot(data = tidyfric, aes(x = phoneme, y = cogval, fill = phoneme)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(x = "Segment", y = "Gravity Hz") +
+  scale_x_discrete(labels = c('s', 'sh' ))
+```
+
+---
+
+#Skewness by Phoneme
+
+```{r stattrans, fig.width=10, fig.height=6, echo=FALSE}
+ggplot(data = tidyfric, aes(x = phoneme, y = skewness, color = phoneme)) +
+  stat_summary(fun.ymin = min, fun.ymax = max, fun.y = median, show.legend = FALSE) +
+  labs(x = "Skewness", y = "Gravity Hz") +
+  scale_x_discrete(labels = c('s', 'sh' )) 
+ 
+```
+
+---
+
+#Fit for Center of Gravity ~ [s] Skewness
+
+```{r modelfit, message = FALSE, echo = FALSE}
+s_fit <- lm(cogval ~ skewness, data = s)
+summary(s_fit)
+
+
+```
+---
+
+#In a Table
+
+
+|Residuals    |          |           |           |           |
+|:-           | :-       | :-        | :-        | :-        |
+| Min         | 1Q       | Median    | 3Q        | Max       |
+|-1060.74     | -21.72   | 58.96     | 123.00    | 405.24    |
+
+<br>
+
+|Coefficients |Estimate  | Std. Error| t-value   | p-value   |
+|:-           | :-       | :-        | :-        | :-        |
+|Intercept    |8027.2    | 212.3     | 37.80     | < 0.001   |
+|[s] Skewness |3029.1    | 259.1     | 11.69     | < 0.001   |
+
+
+---
+
+#Scatterplot of Model 
+```{r scatter, fig.width=10, fig.height=6, message = FALSE, echo = FALSE}
+ggplot(data = s, aes(x = cogval, y = skewness)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "[s] Gravity in Hz", y = "[s] Skewness")
+```
+
+---
+
+#Check Model Diagnostics
+Confidence interval
+```{r confint, message = FALSE, echo = FALSE}
+confint(s_fit)
+```
+Mean of residuals is zero
+```{r resids, message = FALSE, echo = FALSE}
+mean(s_fit$residuals)
+```
+Pearson's correlation coefficient 
+```{r pcorr, message = FALSE, echo = FALSE}
+cor(s$cogval, s$skewness)
+```
+
+---
+
+#Check Model Diagnostics
+Check heteroskedasticity 
+
+```{r skedast, fig.width=10, fig.height=6, message = FALSE, echo = FALSE}
+plot(fitted(s_fit), residuals(s_fit), main = "Residuals vs. Fitted", 
+     ylab = "Residuals", xlab = "Fitted") 
+```
+
+---
+
+#Check Model Diagnostics
+Check distribution 
+
+```{r qqline, fig.width=10, fig.height=6, message = FALSE, echo = FALSE}
+qqnorm(residuals(s_fit))
+qqline(residuals(s_fit))
+```
+
+---
+
+#Check Model Diagnostics
+
+Check influential data points with Cook's distance
+
+```{r cooks, fig.width=10, fig.height=6, message = FALSE, echo = FALSE}
+plot(cooks.distance(s_fit), main = "Cook's Distance", 
+     ylab = "Cook's Distance", xlab = "Observation Number")
+```
+
+---
+
+#Discussion of Results
+
+The model evaluates the hypothesized bivariate relationship between center of gravity and skewness among [s] segements. The model diagnostics indicate a strong correlation between the two variables. 
+
+A check of the confidence interval reveals a 95% probability of the center of gravity intercept being between 7581.14 ~ 8473.33, which our estimated value of 8027.20 falls within. The same is true for the slope of [s] skewness, where we see an interval of 2484.67 ~ 3573.53. The estimated value is again well within this range. These estimated
+values are determined to be significant at the p < .0001 level, and our R-squared value 
+indicates that 87.71% of the variance is accounted for. 
+
+A glance at a scatterplot of the two variables suggests a strong positive correlation with relative normal distribution. Other model diagnostics support this observation. The mean of the residuals is effectively zero (1.13e-14) and the Pearson's correlation coefficient comes in at about .94, suggesting a close relationship. 
+
+---
+
+#Discussion of Results
+
+Plotting the residuals versus the fitted values shows that the data are homoskedastic, though one or two influential data points may be present. A Q-Q plot shows tight distribution around the mean other than the aforementioned outliers. A check of Cook's distance confirms the presence of two influential data points that may be affecting the shape of the model.   
+
+Despite the presence of outliers, every test of statistical significance examined so far indicates that there is a positive relationship between [s] center of gravity and [s] skewness - as one increases, so does the other. The null hypothesis can be rejected in favor of the alternative hypothesis. This is what the linear model tells us.
