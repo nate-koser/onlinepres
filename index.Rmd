@@ -274,6 +274,11 @@ library(tidyverse)
 ##**Thanks for reading!**
 ]
 
+---
+.center[
+![speakers](https://github.com/nate-koser/onlinepres/blob/master/messychart.JPG)
+]
+
 
 
 
