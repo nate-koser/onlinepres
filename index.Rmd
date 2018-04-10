@@ -29,9 +29,8 @@ library(tidyverse)
 
 --
 
-- The article can be accesseed [here.](https://ac.els-cdn.com/S0095447001901536/1-s2.0-S0095447001901536-main.pdf?_tid=c684e2e1-d3d2-4ae0-8bee-3c12e5d6df78&acdnat=1523024193_75be22f6726108076d81645d92776ff0)
+- The article can be accessed [here.](https://ac.els-cdn.com/S0095447001901536/1-s2.0-S0095447001901536-main.pdf?_tid=c684e2e1-d3d2-4ae0-8bee-3c12e5d6df78&acdnat=1523024193_75be22f6726108076d81645d92776ff0)
 
---
 
 ---
 
